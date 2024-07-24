@@ -22,6 +22,25 @@ app.get('/user', async (req, res) => {
 
 })
 
+app.post('/user', async (req, res) => {
+
+    try {
+
+        const name = req.body.firstName
+
+        const user = await User.create({
+            firstName: name
+        })
+
+        return res.status(201).json(user)
+
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json("internal server error")
+    }
+
+})
+
 app.listen(PORT, () => {
     console.log(`Server is up and listening at port: ${PORT}`)
 })
